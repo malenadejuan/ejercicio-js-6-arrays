@@ -77,12 +77,14 @@ const calculoEdadMujeres = array => {
 };
 
 function resumir(array) {
-  const resumen = {};
-  const nPacientes = array.length;
-  const nMayoresEdad = sonMayoresEdad(array);
-  const nHombresDiabeticos = sonHombresDiabeticos(array);
-  const totalDiasIngreso = calculoDiasIngreso(array);
-  const mediaEdadMujeres = calculoEdadMujeres(array);
+  const resumen = {
+    nPacientes: array.length,
+    nMayoresEdad: sonMayoresEdad(array),
+    nHombresDiabeticos: sonHombresDiabeticos(array),
+    totalDiasIngreso: calculoDiasIngreso(array),
+    mediaEdadMujeres: calculoEdadMujeres(array),
+  };
+  return resumen;
 }
 
-resumir(pacientes);
+console.log(resumir(pacientes));
