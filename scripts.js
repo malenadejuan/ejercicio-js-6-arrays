@@ -63,7 +63,18 @@ const sonHombresDiabeticos = array => array
   .filter(objeto => objeto.dieta === "Diabetes" && objeto.paciente.sexo === "H")
   .length;
 
-const calculoDiasIngreso = array => array.reduce((numeroTotal, objeto) => numeroTotal + objeto.diasIngresado);
+const calculoDiasIngreso = array => array
+  .map(objeto => objeto.diasIngresado)
+  .reduce((total, diasIngresado) => total + diasIngresado);
+
+const calculoEdadMujeres = array => {
+  const sonMujeres = array
+    .filter(objeto => objeto.paciente.sexo === "M");
+  const mediaEdadMujeres = sonMujeres
+    .map(objeto => objeto.paciente.edad)
+    .reduce((total, edades) => (total + edades) / sonMujeres.length);
+  return Math.round(mediaEdadMujeres);
+};
 
 function resumir(array) {
   const resumen = {};
@@ -71,8 +82,7 @@ function resumir(array) {
   const nMayoresEdad = sonMayoresEdad(array);
   const nHombresDiabeticos = sonHombresDiabeticos(array);
   const totalDiasIngreso = calculoDiasIngreso(array);
-  let mediaEdadMujeres;
-  console.log(totalDiasIngreso);
+  const mediaEdadMujeres = calculoEdadMujeres(array);
 }
 
 resumir(pacientes);
